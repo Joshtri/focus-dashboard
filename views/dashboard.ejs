@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+
+    <!-- import bootstrap -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="dark-mode-bg">
+    <style>
+        .hidden {
+          display: none !important;
+        }
+
+        .dark-mode-bg {
+            background-color: #333 !important;
+            color: #fff !important;
+        }
+
+        .dark-mode-text {
+            color: #fff !important;
+        }
+
+        .table-dark-mode {
+            background-color: #444 !important;
+            color: #fff !important;
+        }
+
+
+      </style>
+      <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+
+    <!-- Toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <!-- As a heading -->
+    <%-include('partials/header');%>
+    <!-- end header.. -->
+
+
+    <div class="container mt-5">
+        <div class="d-flex flex-column animate__animated animate__backInRight">
+            <h3>Selamat Datang <%= userData.username %></h3>            
+            <h3 class="ms-auto" id="clock">time</h3>
+
+            <div class="dropdown-center mt-1 ms-auto">
+               
+                <button class="btn btn-sm btn-primary dropdown-toggle" aria-expanded="false" type="button" data-bs-toggle="dropdown"><i class="fa-solid fa-moon"></i></button>
+                
+
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"></a></li>
+                    <li><a class="dropdown-item" href="#">Light Mode</a></li> 
+                    <button class="btn btn-primary" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+                    <li><a class="dropdown-item" href="#">Dark Mode</a></li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="col-10">
+            <p>Bagian ini merupakan bagian beranda utama pengguna yang menampilkan rincian kecil dari aktivitas dan rencana yang dilakukan</p>
+
+        </div>
+        <hr>
+
+        <div class="col-lg-6 mb-4 pb-2 pt-2">
+            <h5 class="">Dashboard Menu</h5>
+            
+            <ul class="list-group list-group-horizontal">
+                <button type="button" id="menu-dashboard" class="list-group-item list-group-item-action active">Ikhtisar Data</button>
+                <button type="button" id="menu-berita-terkini" class="list-group-item list-group-item-action">Berita Terkini</button>
+                <button type="button" id="menu-mini-games" class="list-group-item list-group-item-action">Mini Games</button>
+                <button type="button" id="menu-music-session" class="list-group-item list-group-item-action">Music Session</button>
+            </ul>
+        </div>
+
+        <div id="dashboard-content-container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body mb-3">
+                            <h4 class="fw-light text-center text-decoration-underline">Tugas Selesai</h4>
+
+                            <section class="">
+                                <h3 class="pt-3 text-center">0</h3>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">  
+                    <div class="card">
+                        <div class="card-body mb-3">
+                            <h4 class="fw-light text-center text-decoration-underline">Belum Selesai</h4>
+
+                            <section class="">
+                                <h3 class="pt-3 text-center">0</h3>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Konten Berita Terkini -->
+        <div id="berita-terkini-container" class="hidden">
+            <div id="berita-container" class="row">
+              
+                <!-- Tambahkan konten berita terkini, misalnya daftar berita -->
+
+                
+            </div>
+        </div>
+
+        <!-- Konten Mini Games -->
+        <div id="mini-games-container" class="hidden">
+            <div id="" class="row">
+              
+
+            
+            </div>
+        </div>
+
+        <!-- Konten Music Session -->
+        <div id="music-session-container" class="hidden">
+            <div id="" class="row">
+
+            
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const tables = document.querySelectorAll('.table');
+            const darkModeBtn = document.querySelector('.btn');
+    
+            // Toggle dark mode class on the body
+            body.classList.toggle('dark-mode-bg');
+            // Toggle dark mode class on tables
+            tables.forEach(table => table.classList.toggle('table-dark-mode'));
+            // Toggle dark mode text color on the button
+            darkModeBtn.classList.toggle('dark-mode-text');
+        }
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const body = document.body;
+
+        // Periksa preferensi dark mode yang disimpan
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        // Terapkan dark mode jika disimpan sebelumnya
+        body.classList.toggle('dark-mode-bg', isDarkMode);
+    });
+
+    function toggleDarkMode() {
+        const body = document.body;
+        const isDarkMode = body.classList.toggle('dark-mode-bg');
+
+        // Simpan preferensi dark mode ke localStorage
+        localStorage.setItem('darkMode', isDarkMode);
+    }
+</script>
+    
+    
+
+    <script src="assets/js/clock.js"></script>
+    <script>
+        function showDashboardContent() {
+            console.log("Menampilkan Dashboard Ikhtisar Data");
+            document.getElementById('dashboard-content-container').classList.remove("hidden");
+            document.getElementById('berita-terkini-container').classList.add("hidden");
+            document.getElementById('mini-games-container').classList.add("hidden");
+            document.getElementById('music-session-container').classList.add("hidden");
+            // Tambahkan logika atau tindakan yang sesuai untuk menampilkan konten berita terkini
+
+            // Tambahkan kelas "active" pada tombol Dashboard dan hapus dari tombol Berita Terkini
+            document.getElementById('menu-dashboard').classList.add("active");
+            document.getElementById('menu-berita-terkini').classList.remove("active");
+            document.getElementById('menu-mini-games').classList.remove("active");
+            document.getElementById('menu-music-session').classList.remove("active");
+        }
+
+        function showBeritaTerkini() {
+            document.getElementById('berita-terkini-container').classList.remove("hidden");
+            document.getElementById('mini-games-container').classList.add("hidden");
+            document.getElementById('music-session-container').classList.add("hidden");
+            document.getElementById('dashboard-content-container').classList.add("hidden");
+            // Tambahkan logika atau tindakan yang sesuai untuk menampilkan konten berita terkini
+
+            // Tambahkan kelas "active" pada tombol Berita Terkini dan hapus dari tombol Dashboard
+            document.getElementById('menu-dashboard').classList.remove("active");
+            document.getElementById('menu-berita-terkini').classList.add("active");
+            document.getElementById('menu-mini-games').classList.remove("active");
+            document.getElementById('menu-music-session').classList.remove("active");
+        }
+
+
+        function showMiniGames() {
+            console.log("Menampilkan Konten Mini Games");
+            document.getElementById('berita-terkini-container').classList.add("hidden");
+            document.getElementById('mini-games-container').classList.remove("hidden");
+            document.getElementById('music-session-container').classList.add("hidden");
+            document.getElementById('dashboard-content-container').classList.add("hidden");
+            // Tambahkan logika atau tindakan yang sesuai untuk menampilkan konten berita terkini
+
+            // Tambahkan kelas "active" pada tombol Berita Terkini dan hapus dari tombol Dashboard
+            document.getElementById('menu-dashboard').classList.remove("active");
+            document.getElementById('menu-berita-terkini').classList.remove("active");
+            document.getElementById('menu-mini-games').classList.add("active");
+            document.getElementById('menu-music-session').classList.remove("active");
+        }
+
+        function showMusicSession() {
+            console.log("Menampilkan Konten Music Session");
+            document.getElementById('berita-terkini-container').classList.add("hidden");
+            document.getElementById('mini-games-container').classList.add("hidden");
+            document.getElementById('music-session-container').classList.remove("hidden");
+            document.getElementById('dashboard-content-container').classList.add("hidden");
+            // Tambahkan logika atau tindakan yang sesuai untuk menampilkan konten berita terkini
+
+            // Tambahkan kelas "active" pada tombol Berita Terkini dan hapus dari tombol Dashboard
+            document.getElementById('menu-dashboard').classList.remove("active");
+            document.getElementById('menu-berita-terkini').classList.remove("active");
+            document.getElementById('menu-mini-games').classList.remove("active");
+            document.getElementById('menu-music-session').classList.add("active");
+        }
+
+
+        // Event listener untuk menangkap klik pada menu Data Mitra
+        document.addEventListener("DOMContentLoaded", function () {
+
+            document.getElementById("menu-berita-terkini").addEventListener("click", function (event) {
+                event.preventDefault();
+                showBeritaTerkini();
+            });
+
+            // Event listener untuk menangkap klik pada menu Dashboard
+            document.getElementById("menu-dashboard").addEventListener("click", function (event) {
+                event.preventDefault();
+                showDashboardContent();
+            });
+
+            // Event listener untuk menangkap klik pada menu mini games
+            document.getElementById("menu-mini-games").addEventListener("click", function (event) {
+                event.preventDefault();
+                showMiniGames();
+            });
+
+            // Event listener untuk menangkap klik pada menu music session
+            document.getElementById("menu-music-session").addEventListener("click", function (event) {
+                event.preventDefault();
+                showMusicSession();
+            });
+
+        });
+    </script>
+
+
+    <script src="assets/js/newsTop.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

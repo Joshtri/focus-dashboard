@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+
+
+    <!-- import bootstrap -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- As a heading -->
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Focus Dashboard</span>
+        </div>
+    </nav>
+
+
+    <div class="container mt-5">
+        <div class="section-title">
+            <h4>CREATE ACCOUNT</h4>
+            <hr>
+        </div>
+
+            <div class="mx-auto col-7 mt-1"> 
+                <form action="/post_create_account" method="POST">
+
+                    <div class="form-floating d-flex mb-3">
+                        <input type="text"  class="form-control" name="username" id="username" required>
+                        <label for="username">Username</label>
+                    </div>
+
+                    <div class="form-floating d-flex">
+                        <input type="password"  class="form-control" name="password" id="password" required>
+                        <label for="password">Password</label>
+                    </div>
+
+                
+                        <div class="form-text ms-2" id="confirmationMessage"></div>
+                
+
+                    <div class="text-center mb-5 pb-5">
+                        <!-- <button type="submit" data-bs-target="#confirmCreatePINModal" data-bs-toggle="modal" id="btnSubmit" class="mt-4 btn btn-submit">Create</button> -->
+                        <button type="submit" id="btnSubmit" class="mt-4 btn btn-success">Create</button>
+                    </div>
+                </form>
+            </div>
+    </div>
+
+</body>
+</html>
